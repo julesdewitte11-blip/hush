@@ -57,22 +57,4 @@
   window.addEventListener('scroll', markActive, { passive: true });
   window.addEventListener('resize', markActive);
   markActive();
-
-  /* Fade-in on scroll ------------------------------------------------------ */
-  var reveals = document.querySelectorAll('.reveal');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduce || !('IntersectionObserver' in window)) {
-    reveals.forEach(function (el) { el.classList.add('is-visible'); });
-  } else {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-    reveals.forEach(function (el) { observer.observe(el); });
-  }
 })();

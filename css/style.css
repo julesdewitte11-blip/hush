@@ -328,8 +328,12 @@ p { margin: 0; }
 }
 
 .hero__title {
-  font-size: clamp(4rem, 19vw, 6.5rem);
+  /* scales with the screen so "DISCOVER" and "SILENCE" always fit */
+  font-size: clamp(2.75rem, 16vw, 6.5rem);
   letter-spacing: .02em;
+}
+@media (max-width: 400px) {
+  .hero__title { font-size: clamp(2.5rem, 15vw, 4rem); }
 }
 
 .hero__lead {
@@ -710,27 +714,31 @@ html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-f
 }
 
 /* --------------------------------------------------------------------------
-   Motion — quiet fade-in on scroll (only with JS, never with reduced motion)
+   Motion — quiet fade-in on scroll
+   Content is visible by default. The fade is a CSS scroll-driven animation,
+   so nothing stays hidden without JS, with reduced motion, in browsers
+   without support, or in full-page screenshots.
    -------------------------------------------------------------------------- */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
-}
-.js .reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-.scents__grid .reveal:nth-child(2) { transition-delay: .12s; }
-.scents__grid .reveal:nth-child(3) { transition-delay: .24s; }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
 
-.js .hero__content > * {
-  animation: rise 1.4s var(--ease) both;
+  .hero__content > * { animation: rise 1.4s var(--ease) backwards; }
+  .hero__content > :nth-child(2) { animation-delay: .15s; }
+  .hero__content > :nth-child(3) { animation-delay: .3s; }
 }
-.js .hero__content > :nth-child(2) { animation-delay: .15s; }
-.js .hero__content > :nth-child(3) { animation-delay: .3s; }
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(18px); }
+}
+/* movement only: the hero text is never invisible, even if animations pause */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
+  from { transform: translateY(14px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -741,7 +749,6 @@ html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-f
     animation: none !important;
     transition: none !important;
   }
-  .js .reveal { opacity: 1; transform: none; }
 }
 
 /* Tablet: stacked hero, but give the photo a calmer height */
