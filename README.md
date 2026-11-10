@@ -13,11 +13,11 @@ hush/
 ├── assets/
 │   ├── favicon.svg
 │   └── images/
-│       ├── hush_hero.jpg   # hero (Amber-fles op steen)
-│       ├── hush_sage.jpg   # geurkaart Sage
-│       ├── hush_amber.jpg  # geurkaart Amber
-│       ├── hush_iris.jpg   # geurkaart Iris
-│       ├── hush_story.jpg  # About-sectie (vaas in nis)
+│       ├── hush_hero.jpg   # hero (Amber op plint met vijg, breed)
+│       ├── hush_sage.jpg   # geurkaart Sage (plint-reeks)
+│       ├── hush_amber.jpg  # geurkaart Amber (plint-reeks)
+│       ├── hush_iris.jpg   # geurkaart Iris (plint-reeks)
+│       ├── hush_story.jpg  # About-sectie (Sage in zacht licht)
 │       └── og.jpg          # Open Graph-beeld (1200×630)
 └── .nojekyll
 ```
@@ -36,7 +36,7 @@ De nav bevat ankerlinks naar Scents · About · Join, met smooth scroll en een o
 | `--sage-dark` | `#5F6853` | kleine/secundaire tekst, enkel op `--sage-light` |
 | `--amber-bg` | `#E5D9CA` | Amber-kaart |
 | `--iris-bg` | `#DEDAE2` | Iris-kaart |
-| `--hero-bg` | `#CDB89F` | hero-achtergrond, afgestemd op de foto |
+| `--hero-bg` | `#D5C3B1` | hero-achtergrond op mobiel/tablet, afgestemd op de vloer van de hero-foto |
 
 Gecontroleerd contrast (WCAG AA ≥ 4.5:1): `#2E2E2E` op alle achtergronden 6.2–11.7:1, `#5F6853` op `#EEEFE8` 5.05:1.
 `--sage-dark` haalt op de gekleurde kaarten géén 4.5:1, daarom staat de tekst daar in `--color-text`.
@@ -64,9 +64,8 @@ Alle paden zijn relatief, dus de site werkt ook in die submap.
 ## Wat je nog moet invullen
 
 1. **MailerLite-formulier controleren.** De embed is ingebouwd: het Universal-script staat in de `<head>` (account `2735577`) en het formulier (`data-form="vK5C1k"`) staat in de Join-sectie. Velden, checkboxtekst en succesboodschap pas je aan in MailerLite zelf. De Hush-stijl staat in het blok *MailerLite overrides* in `css/style.css`. Doe na publicatie één echte test-inschrijving en controleer of die in MailerLite binnenkomt. Voeg in MailerLite eventueel je GitHub Pages-domein toe als toegestane site.
-2. **Eigen beelden in hoge resolutie.** De hero-, Sage-, Amber- en About-beelden zijn uitsneden uit het design-mockup (max. ±600 px breed). Op grote schermen zijn ze daardoor wat zacht. Vervang ze door de originele beelden met dezelfde bestandsnamen. Houd ze onder ±300 KB (webp of jpg ±75 %).
-3. **Open Graph-URL.** `og:image` is nu relatief (`assets/images/og.jpg`). Sommige platformen (Facebook, LinkedIn) willen een absolute URL. Vervang hem na publicatie door `https://<gebruikersnaam>.github.io/hush/assets/images/og.jpg` en voeg eventueel een `og:url` toe.
-4. *(Optioneel)* Video: zet een bestand in `assets/video/` en voeg het toe met `autoplay muted loop playsinline` en een `poster`.
+2. **Open Graph-URL.** `og:image` is nu relatief (`assets/images/og.jpg`). Sommige platformen (Facebook, LinkedIn) willen een absolute URL. Vervang hem na publicatie door `https://<gebruikersnaam>.github.io/hush/assets/images/og.jpg` en voeg eventueel een `og:url` toe.
+3. *(Optioneel)* Video: zet een bestand in `assets/video/` en voeg het toe met `autoplay muted loop playsinline` en een `poster`.
 
 ## Aannames
 
@@ -80,9 +79,13 @@ Alle paden zijn relatief, dus de site werkt ook in die submap.
 - **Kenmerken onder elke geur** (Fresh · Natural · Understated, enz.) komen uit het design. Het zijn sfeerwoorden, geen geurnoten.
 - **Footer-tagline** "Fragrance for the quietly confident" komt uit het design.
 - **Formulier**: de velden, de opt-in-tekst en de knoptekst komen uit je MailerLite-formulier. De standaardkop van MailerLite is verborgen, omdat de sectie al de titel "Not loud. Just Hush." heeft.
-- **Iris-beeld** is de aangeleverde productfoto (`Edit_perfume_product_photo…jpg`). Die is ook gebruikt voor het OG-beeld.
-- **Kaartachtergronden.** Het design toont de flesjes zonder kaart. De briefing vraagt een eigen achtergrondkleur per geur, dus elke geur zit in een kaart in `--sage-bg`, `--amber-bg` of `--iris-bg`. Het beeld wordt daarin ingemengd (`mix-blend-mode: multiply` + zachte randen).
-- **Hero-achtergrond** (`--hero-bg`) is een warme beigetint die uit de foto is genomen, zodat de foto aan de linkerkant naadloos overvloeit. Ze valt buiten het opgegeven palet.
+- **Beelden** komen uit de map *Geneerde foto's* (`DVG2A_JulesDeWitte_project-folder`), verkleind en gecomprimeerd (48–128 KB per stuk):
+  - hero: `Extend_perfume_product_photo_001ac8ca` (breed, lege linkerkant voor de titel). Dezelfde foto is bijgesneden tot het OG-beeld.
+  - kaarten: de plint-reeks, zodat de drie kaarten bij elkaar passen: Sage `Perfume_bottle_on_stone_plinth_96b41a6b`, Amber `Glass_perfume_bottle_on_plinth_a16d74ee`, Iris `Perfume_bottle_on_stone_plinth_1a0c9e44`.
+  - About: `Edit_product_photo_liquid_color_a20322b9` (Sage in zacht licht, past bij het salievlak).
+- **About-layout**: het beeld en de tekst staan op desktop 50/50 in plaats van 58/42 zoals in het design, zodat het staande productbeeld niet te hard wordt bijgesneden.
+- **Kaartachtergronden.** Het design toont de flesjes zonder kaart. De briefing vraagt een eigen achtergrondkleur per geur, dus elke geur zit in een kaart in `--sage-bg`, `--amber-bg` of `--iris-bg`. De foto vult de bovenkant van de kaart (4:5).
+- **Hero.** Op desktop vult de foto de hele hero, met de titel op de lege linkerkant. Op mobiel en tablet staat de foto boven de tekst en loopt hij over in `--hero-bg`, een beigetint die uit de foto is genomen en buiten het opgegeven palet valt.
 - **Secundair font**: Jost (licht), gekozen omdat het het dichtst bij de geometrische sans uit het design ligt.
 - **H1** is "Discover the silence". "HUSH" staat in het logo en zit als verborgen tekst in de h1 voor screenreaders en SEO.
 - **Favicon**: een eenvoudige "H" in `#2E2E2E` op `#EEEFE8` (SVG).

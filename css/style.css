@@ -14,7 +14,7 @@
   --iris-bg:    #DEDAE2;   /* Iris card */
 
   /* Hero backdrop, matched to the left edge of the hero photo */
-  --hero-bg: #CDB89F;
+  --hero-bg: #D5C3B1;
 
   /* Type */
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
@@ -309,7 +309,7 @@ p { margin: 0; }
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--hero-bg) linear-gradient(180deg, #C4AC91 0%, var(--hero-bg) 55%, #D6C2A9 100%);
+  background: var(--hero-bg);
   overflow: hidden;
 }
 
@@ -318,8 +318,9 @@ p { margin: 0; }
 }
 .hero__media img {
   width: 100%;
-  aspect-ratio: 584 / 452;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: 74% 50%;
 }
 
 .hero__content {
@@ -343,20 +344,17 @@ p { margin: 0; }
     align-items: center;
     min-height: clamp(560px, 53vw, 780px);
   }
+  /* full-bleed photo; the empty left side of the shot carries the title */
   .hero__media {
     position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 62%;
+    inset: 0;
     padding: 0;
-    /* soft fade into the backdrop on the left */
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28%);
-            mask-image: linear-gradient(to right, transparent 0, #000 28%);
   }
   .hero__media img {
     width: 100%;
     height: 100%;
     aspect-ratio: auto;
-    object-position: 40% 60%;
+    object-position: 60% 55%;
   }
   .hero__content {
     position: relative;
@@ -389,39 +387,29 @@ p { margin: 0; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem 1.5rem 2.75rem;
+  padding: 0 1.5rem 2.75rem;
   text-align: center;
+  overflow: hidden;
 }
 .scent--sage  { background: var(--sage-bg); }
 .scent--amber { background: var(--amber-bg); }
 .scent--iris  { background: var(--iris-bg); }
 
+/* photo fills the top of the card, edge to edge */
 .scent__media {
-  width: min(100%, 260px);
-  aspect-ratio: 1;
-  margin-bottom: 1.75rem;
+  width: calc(100% + 3rem);
+  margin: 0 -1.5rem 2rem;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  /* feather the photo edges so it sits in the card without a hard frame */
-  -webkit-mask-image:
-    linear-gradient(to right, transparent, #000 14%, #000 86%, transparent),
-    linear-gradient(to bottom, transparent, #000 12%, #000 90%, transparent);
-  -webkit-mask-composite: source-in;
-          mask-image:
-    linear-gradient(to right, transparent, #000 14%, #000 86%, transparent),
-    linear-gradient(to bottom, transparent, #000 12%, #000 90%, transparent);
-          mask-composite: intersect;
 }
 .scent__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* lets the warm studio backdrop melt into the card colour */
-  mix-blend-mode: multiply;
-  transition: transform 1.2s var(--ease);
+  object-position: 50% 60%;
+  transition: transform 1.6s var(--ease);
 }
-.scent--iris .scent__media img { object-position: 50% 62%; transform: scale(1.35); }
 .scent:hover .scent__media img { transform: scale(1.03); }
-.scent--iris:hover .scent__media img { transform: scale(1.4); }
 
 .scent__name {
   font-size: 1.75rem;
@@ -438,7 +426,8 @@ p { margin: 0; }
 
 @media (min-width: 768px) {
   .scents__grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .scent { padding: 3rem 1.25rem 3rem; }
+  .scent { padding: 0 1.25rem 3rem; }
+  .scent__media { width: calc(100% + 2.5rem); margin: 0 -1.25rem 2rem; }
 }
 
 @media (min-width: 1024px) {
@@ -456,8 +445,9 @@ p { margin: 0; }
 .story__media img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 598 / 358;
+  aspect-ratio: 1;
   object-fit: cover;
+  object-position: 50% 55%;
 }
 
 .story__content {
@@ -474,9 +464,9 @@ p { margin: 0; }
 
 @media (min-width: 768px) {
   .story {
-    grid-template-columns: 58fr 42fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    min-height: clamp(480px, 35vw, 560px);
+    min-height: clamp(520px, 44vw, 680px);
   }
   .story__media { align-self: stretch; }
   .story__media img { aspect-ratio: auto; }
@@ -756,7 +746,7 @@ html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-f
 
 /* Tablet: stacked hero, but give the photo a calmer height */
 @media (min-width: 768px) and (max-width: 1023.98px) {
-  .hero__media img { aspect-ratio: 16 / 10; object-position: 40% 60%; }
+  .hero__media img { aspect-ratio: 16 / 9; object-position: 70% 50%; }
   .hero__content { padding: 3rem var(--gutter) 4.5rem; }
   .hero__title { font-size: clamp(5.5rem, 13vw, 8rem); }
 }
