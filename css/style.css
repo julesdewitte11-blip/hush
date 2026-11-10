@@ -557,62 +557,131 @@ p { margin: 0; }
 }
 
 /* MailerLite overrides -----------------------------------------------------
-   Puts the default MailerLite embed in the Hush style once the real embed
-   code replaces the placeholder form. */
-.join .ml-embedded,
-.join .ml-form-embedContainer,
-.join .ml-form-embedWrapper,
-.join .ml-form-embedBody {
+   MailerLite injects its own styles with ID selectors (#mlb2-…) and
+   !important. "html body #join .ml-embedded" outranks those, so the form
+   follows the Hush style. */
+html body #join .ml-embedded .ml-form-embedContainer,
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper,
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody {
+  width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
   border: 0 !important;
+  border-radius: 0 !important;
   font-family: var(--font-body) !important;
 }
-.join .ml-form-embedContent { display: none !important; } /* we use our own heading */
-.join .ml-form-embedWrapper input.form-control {
+/* MailerLite's own (empty) heading block: we use the section heading */
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent { display: none !important; }
+
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow { margin-bottom: 1.25rem !important; }
+
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.form-control {
   height: auto !important;
   padding: .85rem 0 !important;
   border: 0 !important;
   border-bottom: 1px solid var(--color-text) !important;
   border-radius: 0 !important;
   background: transparent !important;
+  box-shadow: none !important;
   color: var(--color-text) !important;
   font-family: var(--font-body) !important;
   font-size: 1rem !important;
   font-weight: 300 !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
 }
-.join .ml-form-embedWrapper input.form-control::placeholder { color: var(--sage-dark) !important; }
-.join .ml-form-embedWrapper .ml-form-checkboxRow label p,
-.join .ml-form-embedWrapper .ml-form-checkboxRow .label-description {
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.form-control::placeholder {
+  color: var(--sage-dark) !important;
+  font-size: .75rem !important;
+  font-weight: 400 !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+}
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.form-control:focus {
+  outline: none !important;
+  border-bottom-width: 2px !important;
+  padding-bottom: calc(.85rem - 1px) !important;
+}
+
+/* opt-in checkbox */
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label {
   color: var(--color-text) !important;
   font-family: var(--font-body) !important;
   font-size: .875rem !important;
   font-weight: 300 !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
 }
-.join .ml-form-embedWrapper .ml-form-embedSubmit button.primary {
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label p,
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label span {
+  color: inherit !important;
+  font: inherit !important;
+}
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before {
+  border: 1px solid var(--color-text) !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: var(--color-text) !important;
+  background-color: var(--color-text) !important;
+}
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:focus-visible ~ .custom-control-label::before {
+  outline: 1px solid var(--color-text) !important;
+  outline-offset: 3px !important;
+}
+
+/* submit button = .btn */
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit { margin: .75rem 0 0 !important; }
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
   width: 100% !important;
   height: auto !important;
   padding: 1rem 1.6rem .9rem !important;
   border: 1px solid var(--color-text) !important;
   border-radius: 0 !important;
-  background: var(--color-text) !important;
+  background-color: var(--color-text) !important;
+  box-shadow: none !important;
   color: var(--sage-light) !important;
   font-family: var(--font-display) !important;
   font-size: 1.05rem !important;
   font-weight: 400 !important;
+  line-height: 1 !important;
   letter-spacing: .14em !important;
   text-transform: uppercase !important;
+  transition: background-color .4s var(--ease), color .4s var(--ease) !important;
 }
-.join .ml-form-embedWrapper .ml-form-embedSubmit button.primary:hover {
-  background: transparent !important;
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+  background-color: transparent !important;
+  border-color: var(--color-text) !important;
   color: var(--color-text) !important;
 }
-.join .ml-form-successBody h4,
-.join .ml-form-successBody p {
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading .ml-form-embedSubmitLoad::after {
+  border-color: var(--sage-light) var(--sage-light) var(--sage-light) transparent !important;
+}
+
+/* validation + success message */
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-error input.form-control { border-bottom-color: #9E3B32 !important; }
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-error .custom-checkbox-radio-list {
+  padding: 0 !important;
+  border: 0 !important;
+}
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-error .custom-checkbox .custom-control-label::before { border-color: #9E3B32 !important; }
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4,
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
   color: var(--color-text) !important;
   font-family: var(--font-body) !important;
+  font-weight: 300 !important;
+  text-align: center !important;
+}
+html body #join .ml-embedded .ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
+  font-family: var(--font-display) !important;
+  font-size: 2rem !important;
+  font-weight: 400 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
 }
 
 /* --------------------------------------------------------------------------

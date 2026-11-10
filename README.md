@@ -9,7 +9,7 @@ Puur HTML + CSS + een beetje vanilla JS, geen framework of build-stap.
 hush/
 ├── index.html            # de pagina
 ├── css/style.css         # alle stijl (mobile-first)
-├── js/main.js            # mobiel menu, actieve nav-link, fade-in, placeholder-form
+├── js/main.js            # mobiel menu, actieve nav-link, fade-in
 ├── assets/
 │   ├── favicon.svg
 │   └── images/
@@ -63,7 +63,7 @@ Alle paden zijn relatief, dus de site werkt ook in die submap.
 
 ## Wat je nog moet invullen
 
-1. **MailerLite-embedcode.** Zoek in `index.html` naar `<!-- MAILERLITE EMBED HIER -->`, plak de embedcode daar en verwijder het placeholder-formulier (`<div class="signup" data-placeholder-form>…</div>`). Het blok *MailerLite overrides* in `css/style.css` zet de standaard MailerLite-stijl om naar de Hush-stijl. Controleer na het plakken of jouw embed dezelfde klassen gebruikt (`.ml-form-embedWrapper`, `.form-control`, `button.primary`); pas de selectors aan als dat niet zo is. Het stukje *Placeholder sign-up form* in `js/main.js` mag je dan ook weghalen.
+1. **MailerLite-formulier controleren.** De embed is ingebouwd: het Universal-script staat in de `<head>` (account `2735577`) en het formulier (`data-form="vK5C1k"`) staat in de Join-sectie. Velden, checkboxtekst en succesboodschap pas je aan in MailerLite zelf. De Hush-stijl staat in het blok *MailerLite overrides* in `css/style.css`. Doe na publicatie één echte test-inschrijving en controleer of die in MailerLite binnenkomt. Voeg in MailerLite eventueel je GitHub Pages-domein toe als toegestane site.
 2. **Eigen beelden in hoge resolutie.** De hero-, Sage-, Amber- en About-beelden zijn uitsneden uit het design-mockup (max. ±600 px breed). Op grote schermen zijn ze daardoor wat zacht. Vervang ze door de originele beelden met dezelfde bestandsnamen. Houd ze onder ±300 KB (webp of jpg ±75 %).
 3. **Open Graph-URL.** `og:image` is nu relatief (`assets/images/og.jpg`). Sommige platformen (Facebook, LinkedIn) willen een absolute URL. Vervang hem na publicatie door `https://<gebruikersnaam>.github.io/hush/assets/images/og.jpg` en voeg eventueel een `og:url` toe.
 4. *(Optioneel)* Video: zet een bestand in `assets/video/` en voeg het toe met `autoplay muted loop playsinline` en een `poster`.
@@ -79,7 +79,7 @@ Alle paden zijn relatief, dus de site werkt ook in die submap.
 - **Winkelmandje-icoon** uit het design is weggelaten (geen shop). Op die plek staat op mobiel de menuknop.
 - **Kenmerken onder elke geur** (Fresh · Natural · Understated, enz.) komen uit het design. Het zijn sfeerwoorden, geen geurnoten.
 - **Footer-tagline** "Fragrance for the quietly confident" komt uit het design.
-- **Formuliervelden**: Name, Email en checkbox "I agree to receive emails from Hush.", knop "Subscribe". Het placeholder-formulier verstuurt niets en toont alleen een melding.
+- **Formulier**: de velden, de opt-in-tekst en de knoptekst komen uit je MailerLite-formulier. De standaardkop van MailerLite is verborgen, omdat de sectie al de titel "Not loud. Just Hush." heeft.
 - **Iris-beeld** is de aangeleverde productfoto (`Edit_perfume_product_photo…jpg`). Die is ook gebruikt voor het OG-beeld.
 - **Kaartachtergronden.** Het design toont de flesjes zonder kaart. De briefing vraagt een eigen achtergrondkleur per geur, dus elke geur zit in een kaart in `--sage-bg`, `--amber-bg` of `--iris-bg`. Het beeld wordt daarin ingemengd (`mix-blend-mode: multiply` + zachte randen).
 - **Hero-achtergrond** (`--hero-bg`) is een warme beigetint die uit de foto is genomen, zodat de foto aan de linkerkant naadloos overvloeit. Ze valt buiten het opgegeven palet.

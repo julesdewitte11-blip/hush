@@ -75,18 +75,4 @@
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
     reveals.forEach(function (el) { observer.observe(el); });
   }
-
-  /* Placeholder sign-up form (remove once the MailerLite embed is in) ------ */
-  var placeholder = document.querySelector('[data-placeholder-form] form');
-  if (placeholder) {
-    placeholder.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var status = placeholder.querySelector('.signup__status');
-      if (!placeholder.checkValidity()) {
-        status.textContent = 'Please fill in your name, a valid email and tick the box.';
-        return;
-      }
-      status.textContent = 'This form is a placeholder and is not connected yet.';
-    });
-  }
 })();
